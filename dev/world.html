@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>World — Le dernier humain sur Internet</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #0b0d10; }
+    #game { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; outline: none; }
+    #ui { position: fixed; inset: 0; pointer-events: none; }
+    #hud {
+      position: fixed; right: 8px; top: 8px; margin: 0; padding: 6px 8px; z-index: 10;
+      font: 11px/1.45 ui-monospace, 'IBM Plex Mono', monospace; color: #f2efe8; background: rgba(11, 13, 16, 0.6);
+      border-radius: 4px; pointer-events: none; white-space: pre;
+    }
+    body.clean #hud { display: none; }
+  </style>
+</head>
+<body>
+  <canvas id="game" tabindex="0"></canvas>
+  <div id="ui"></div>
+  <pre id="hud"></pre>
+  <script type="module" src="./world.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Audio — table de mixage</title>
+<style>
+  :root {
+    --ink: #0b0d10; --panel: #12161c; --line: #232a33; --text: #d9dde4; --mute: #7d8794;
+    --cyan: #5ce1e6; --magenta: #ff5fa2; --amber: #ffb454; --paper: #f3e9d2; --violet: #c77dff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink); color: var(--text); font: 13px/1.4 Inter, system-ui, sans-serif; }
+  header { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+  header h1 { font-size: 15px; font-weight: 600; margin: 0; letter-spacing: 0.02em; }
+  header h1 span { color: var(--amber); }
+  #unlock { background: var(--amber); color: var(--ink); border: 0; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+  #unlock.on { background: #1d3a2a; color: #7cff6b; }
+  #status { color: var(--mute); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; }
+  main { display: grid; grid-template-columns: 1fr 360px; gap: 0; }
+  .scope { position: sticky; top: 0; height: 100vh; border-left: 1px solid var(--line); padding: 16px; display: flex; flex-direction: column; gap: 12px; background: var(--panel); }
+  canvas { width: 100%; background: #07090c; border-radius: 6px; border: 1px solid var(--line); }
+  #spec { height: 220px; }
+  #wave { height: 90px; }
+  .meters { display: grid; grid-template-columns: 70px 1fr 56px; gap: 6px 10px; align-items: center; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; }
+  .bar { height: 8px; background: #07090c; border-radius: 4px; overflow: hidden; border: 1px solid var(--line); }
+  .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--cyan), var(--amber) 70%, var(--magenta)); }
+  .board { padding: 16px 20px 40px; display: flex; flex-direction: column; gap: 18px; }
+  section h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mute); margin: 0 0 8px; font-weight: 600; }
+  .grid { display: flex; flex-wrap: wrap; gap: 6px; }
+  button.k { background: #181d24; color: var(--text); border: 1px solid var(--line); border-radius: 5px; padding: 6px 10px; cursor: pointer; font: 12px 'IBM Plex Mono', ui-monospace, monospace; }
+  button.k:hover { border-color: var(--cyan); }
+  button.k.flash { background: #1c3236; border-color: var(--cyan); }
+  button.k.on { background: #3a2a14; border-color: var(--amber); color: var(--paper); }
+  button.k.human { border-color: #4a3a22; }
+  .sliders { display: grid; grid-template-columns: 90px 1fr 44px; gap: 6px 12px; align-items: center; max-width: 620px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; }
+  input[type=range] { width: 100%; accent-color: var(--amber); }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  input[type=text] { flex: 1; min-width: 260px; background: #07090c; color: var(--text); border: 1px solid var(--line); border-radius: 5px; padding: 7px 10px; font: 13px Inter, system-ui, sans-serif; }
+  label.chk { color: var(--mute); font-size: 12px; display: flex; gap: 6px; align-items: center; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } .scope { position: static; height: auto; border-left: 0; border-bottom: 1px solid var(--line); } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Le dernier humain — <span>table de mixage</span></h1>
+  <button id="unlock">Activer le son</button>
+  <div id="status">contexte : —</div>
+</header>
+<main>
+  <div class="board" id="board"></div>
+  <aside class="scope">
+    <canvas id="spec" width="656" height="440"></canvas>
+    <canvas id="wave" width="656" height="180"></canvas>
+    <div class="meters" id="meters"></div>
+  </aside>
+</main>
+<script type="module" src="./audio.js"></script>
+</body>
+</html>

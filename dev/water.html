@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Water — Le dernier humain sur Internet</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #0b0d10; }
+    #game { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; outline: none; }
+    #ui { position: fixed; inset: 0; pointer-events: none; }
+    #boot-loader {
+      position: fixed; inset: 0; z-index: 50; display: grid; place-content: center; gap: 22px; justify-items: center;
+      background: radial-gradient(120% 90% at 50% 40%, #151a20 0%, #0b0d10 60%);
+      color: #f2efe8; transition: opacity 0.6s ease;
+    }
+    #boot-loader.is-done { opacity: 0; pointer-events: none; }
+    #boot-loader h1 {
+      margin: 0; font: italic 400 clamp(34px, 5.4vw, 72px)/1 'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+      letter-spacing: 0.01em; text-align: center;
+    }
+    #boot-loader .track { width: min(280px, 60vw); height: 2px; background: rgba(242, 239, 232, 0.14); overflow: hidden; }
+    #boot-loader [data-progress] { height: 100%; background: #ffb454; transform-origin: 0 50%; transform: scaleX(0.02); transition: transform 0.3s ease; }
+    #boot-loader [data-label] { font: 500 11px/1 ui-monospace, 'IBM Plex Mono', monospace; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(242, 239, 232, 0.5); }
+  </style>
+</head>
+<body>
+  <canvas id="game" tabindex="0"></canvas>
+  <div id="ui"></div>
+  <div id="boot-loader" aria-live="polite">
+    <h1>Le dernier humain sur Internet</h1>
+    <div class="track"><div data-progress></div></div>
+    <span data-label>Connexion</span>
+  </div>
+  <div id="water-help" style="position:fixed;left:12px;bottom:10px;z-index:5;font:500 11px/1.5 ui-monospace,monospace;color:rgba(242,239,232,.75);pointer-events:none">1–0 vues · P préréglage lumière · ZQSD/WASD + souris : caméra libre
+  </div>
+  <script type="module" src="./water.js"></script>
+</body>
+</html>
